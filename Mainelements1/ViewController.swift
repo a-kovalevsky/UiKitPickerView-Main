@@ -62,30 +62,30 @@ class ViewController: UIViewController {
         doneButton.isHidden = true
     }//объявили фукнцию , в которой обращаекмся к каждому аутлету и делаем его скрытым
         
-    func choiceUIElement () {//также необходимо подключить делегат пикера(проткоол) через экстэншн лучше всего или напрямую к классу )
+    func choiceUIElement () {
         let elementPicker = UIPickerView()
-        elementPicker.delegate = self //назначаем делегатом (фактически передает ответсвенность (можем юзать функции когда является делегатом протокола и тп,но тут гляди конкретно к одной переменной
+        elementPicker.delegate = self
         name.inputView = elementPicker //кастом инпут вью, тоесть фактически замены классической клавы ,вылетающей на текст филд
         
         //custom
         elementPicker.backgroundColor = .systemOrange
         
-    }//метод для того,чтоб вместо клавиатуры вылетел uipicker view
+    }
     
     func createToolBar () {
         let toolBar = UIToolbar() //создаем экземпляр класса ,юи тулбар как надстройка типа нашего элемента замены клавиатуры , можно делать разные
         toolBar.sizeToFit()
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissKeybord) )//создаем саму кнопку типа барбатонитем и не через интерфейс билдер,а напрямую в коде ето все настриваем,также тут в экшене вызывается отдельная функция для скрытия клавиатуры,ее можно по-разному написать !!!!!!!селектор  принимает функцию objectiveC, не забудь указать при ее создании @objc
-        toolBar.setItems([doneButton], animated: true)//размещаем кнопку в тулбаре,можно несколько объектов,так как массив,можно разные кнопки.
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissKeybord) )
+        toolBar.setItems([doneButton], animated: true)
         toolBar.isUserInteractionEnabled = true//позволяем взаимодействовать с элементом
         name.inputAccessoryView = toolBar//добавляем как бы етот тулбар на замененную клавиатуру
         
         //customization
-        toolBar.tintColor = .white //шрифт
-        toolBar.barTintColor = .systemOrange //бэкграунд
+        toolBar.tintColor = .white
+        toolBar.barTintColor = .systemOrange
         
-    }//cоздаем ету кнопку над пикервью ,done,чтоб закрывать клавиатуру,
-    @objc func dismissKeybord() {//objc когда обращаемся к селектору
+    }
+    @objc func dismissKeybord() {
         view.endEditing(true)
     }
     @IBAction func segmentedAction(_ sender: UISegmentedControl) {
