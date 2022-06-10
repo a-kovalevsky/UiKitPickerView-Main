@@ -155,16 +155,16 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return 1 //количесвто барабанов
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        uiElements.count //количесвто элементов в барабане
+        uiElements.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        uiElements[row]//row нынешний элемент массива конкретный,так как они проиндексированы по row ,для отображения значения в каждом компоненте самой ячейки барабана
+        uiElements[row]
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedElement = uiElements[row]
         name.text = selectedElement
         
-        switch row {//чистит все элементы кроме выбранных,сравнивает с номером приходящей ячейки,а порядок массива мы знаем
+        switch row {
         case 0:
             hideAllElements()
             segmentedControl.isHidden = false
@@ -185,13 +185,11 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             doneButton.isHidden = false
         default: hideAllElements()
         }
-    }//позволяет работать с выбранным элементом,сама логика,создаем для этого свойство класса опциональное и присваиваем нынешнюю ячейку массива
-    //в зависимости от индекса row будет скрывать отдельные элементы
-    //помни что надо реализовать обязат методы протокола
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView { //мы используем ету функцию для работы над лейблами в пикер вью
-        var pickerViewLabel = UILabel() //создаем экземпляр класса лэйбла
+    }
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var pickerViewLabel = UILabel()
         
-        if let currentLabel = view as? UILabel { //выясняем можем ли присвоить вью с лэйбл,но для чего сей проверка хороший вопрос
+        if let currentLabel = view as? UILabel {
             pickerViewLabel = currentLabel
         } else {
             pickerViewLabel = UILabel()
@@ -201,7 +199,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         pickerViewLabel.textAlignment = .center
         pickerViewLabel.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 23)
         pickerViewLabel.text = uiElements[row] //присваиваем и пересоздаем как будет выглядеть внешний вид пикер вью и присвоили собственно массив с выборами
-      //вот тут немного разобраться шо там как заменяется
+
         
         return pickerViewLabel
     }
